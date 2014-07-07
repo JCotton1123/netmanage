@@ -1,0 +1,21 @@
+body section {
+    margin-bottom: 40px;
+}
+
+.dataTables_wrapper img.loading {
+    display: block;
+    margin: auto;
+}
+
+.dataTables_empty {
+    text-align: center;
+    font-style: italic;
+}
+
+#search .modal-content {
+    padding: 20px;
+}
+
+#search button {
+    width: 100%;
+}

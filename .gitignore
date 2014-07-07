@@ -1,0 +1,36 @@
+# Vendor
+/Vendor/*
+!/Vendor/empty
+
+# Cake tmp
+/tmp/*
+!/tmp/
+ 
+/tmp/cache/*
+!/tmp/cache/
+!/tmp/cache/empty
+ 
+/tmp/cache/models/*
+!/tmp/cache/models/
+!/tmp/cache/models/empty
+ 
+/tmp/cache/persistent/*
+!/tmp/cache/persistent/
+!/tmp/cache/persistent/empty
+ 
+/tmp/cache/views/*
+!/tmp/cache/views/
+!/tmp/cache/views/empty
+ 
+/tmp/logs/*
+!/tmp/logs/
+!/tmp/logs/empty
+ 
+/tmp/sessions/*
+!/tmp/sessions/
+!/tmp/sessions/empty
+ 
+/tmp/tests/*
+!/tmp/tests/
+!/tmp/tests/empty
+
