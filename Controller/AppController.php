@@ -8,7 +8,7 @@ class AppController extends Controller {
         'Session',
         'RequestHandler',
         'DataTables.DataTables',
-        'DebugKit.Toolbar'
+        'DebugKit.Toolbar',
     );
 
     public $helpers = array(

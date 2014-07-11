@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  Mousetrap.bind('s s s',function(){
+  Mousetrap.bind('s',function(){
     var search = '<div id="search" class="modal fade" role="dialog">';
     search += '<div class="modal-dialog modal-sm">';
     search += '<div class="modal-content">';
@@ -9,6 +9,8 @@ $(document).ready(function() {
     $('body').append(search);
     $('#search').modal({
       remote: '/dashboard/search'
+    }).on('shown.bs.modal', function (e) {
+     $('#search input').focus();
     });
   });
 

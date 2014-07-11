@@ -85,18 +85,13 @@ Configure::write('Dispatcher.filters', array(
 ));
 
 /**
- * Configures default file logging options
+ * Configure logging
  */
 App::uses('CakeLog', 'Log');
-CakeLog::config('debug', array(
-    'engine' => 'File',
-    'types' => array('notice', 'info', 'debug'),
-    'file' => 'debug',
-));
-CakeLog::config('error', array(
-    'engine' => 'File',
-    'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
-    'file' => 'error',
+CakeLog::config('default', array(
+    'engine' => 'DatabaseLogger.DatabaseLog',
+    'model' => 'NetmanageLog',
+//    'types' => array('alert', 'emergency', 'critical', 'error', 'warning', 'info', 'debug')
 ));
 
 
@@ -108,14 +103,3 @@ require APP . '/Vendor/autoload.php';
 spl_autoload_unregister(array('App', 'load'));
 spl_autoload_register(array('App', 'load'), true, true);
 
-
-function arrayToAssoc($array,$array_key){
-
-    $assoc_array = array();
-
-    foreach($array as $element){
-        $assoc_array[$element[$array_key]] = $element;
-    }
-
-    return $assoc_array;
-}
