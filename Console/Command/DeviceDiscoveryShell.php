@@ -1,6 +1,7 @@
 <?php
 
-App::uses('SNMPDevice', 'SNMPDevice');
+App::uses('SNMPDevice', 'SimpleSNMP');
+App::uses('CiscoSNMPDevice', 'SimpleSNMP');
 
 class DeviceDiscoveryShell extends AppShell {
 
@@ -83,17 +84,17 @@ class DeviceDiscoveryShell extends AppShell {
     private function _discoverDevice($ipAddr){
 
         $device = array(
-            "mgmt_ip_addr" => ip2long($ipAddr)
+            "mgmt_ip_addr" => ip2long($ipAddr),
+            "last_seen" => date('Y-m-d H:i:s')
         );
 
         $snmpComm = $this->settings['global.snmp_community_r'];
         $snmpTimeout = $this->settings['global.snmp_timeout'];
         $snmpRetry = $this->settings['global.snmp_retry'];
 
-        $snmpDevice = new SNMPDevice(
+        $snmpDevice = new CiscoSNMPDevice(
             $ipAddr,
             $snmpComm,
-            false, //Don't need a r/w community for discovery
             $snmpTimeout,
             $snmpRetry
         );
