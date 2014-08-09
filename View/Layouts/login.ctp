@@ -27,17 +27,18 @@
 
         echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css');
         echo $this->Html->css('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css');
+        echo $this->Html->css('/vis/vis.css');
         echo $this->fetch('css');
 	?>
 </head>
 <body>
     <div class="container">
-        <?php echo $this->Session->flash(); ?>
-        <?php echo $this->fetch('content'); ?>
+      <?php echo $this->fetch('content'); ?>
     </div>
     <?php
         echo $this->Html->script('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js');
         echo $this->Html->script('//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js');
+        echo $this->Html->script('/vis/vis.js');
         echo $this->fetch('script');
     ?>
 </body>

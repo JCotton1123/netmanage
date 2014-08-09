@@ -160,7 +160,7 @@ class DataTablesRequest
         $filter = array();
         if(isset($this->request['sSearch']) && $this->request['sSearch'] != ""){
             for($i=0;$i<count($columns);$i++){
-                if(isset($this->request['bSearchable_'.$i]) && $this->request['bSearchable_'.$i] == "true"){
+                if(isset($this->request['bSearchable_'.$i]) && $this->request['bSearchable_'.$i] == "true" && isset($columns[$i])){
                     $column = $columns[$i];
                     $filter[] = array($column['model'].".".$column['column']." LIKE" => "%" . $this->request['sSearch'] . "%");
                 }

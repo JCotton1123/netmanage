@@ -2,10 +2,11 @@
 
 class CiscoSNMPDevice extends SNMPDevice {
 
-     private static $defaultAttrDefs = array(
+     public static $defaultAttrDefs = array(
         'name' => array(
             'oid' => '1.3.6.1.2.1.1.5.0',
-            'type' => 's'
+            'type' => 's',
+            'filter' => '/^([^.]+)\./'
         ),
         'serial' => array(
             'oid' => '1.3.6.1.4.1.9.3.6.3.0',
@@ -19,7 +20,7 @@ class CiscoSNMPDevice extends SNMPDevice {
         'model' => array(
             'oid' => '1.3.6.1.2.1.47.1.1.1.1.13.1001',
             'type' => 's',
-            'filter' => '/\w(.+)\w/'
+            //'filter' => '/\w(.+)\w/'
         ),
         'ifdesc' => array(
             'oid' => '1.3.6.1.2.1.2.2.1.2',
@@ -31,7 +32,8 @@ class CiscoSNMPDevice extends SNMPDevice {
         ),
         'cdpCacheDeviceId' => array(
             'oid' => 'cdpCacheDeviceId',
-            'type' => 's'
+            'type' => 's',
+            'filter' => '/^([^.]+)\./'
         ),
         'cdpCacheDevicePort' => array(
             'oid' => 'cdpCacheDevicePort',
@@ -108,9 +110,8 @@ class CiscoSNMPDevice extends SNMPDevice {
     /**
      * Constructor
      */
-    public function __construct($ipAddress, $snmpCommunity, $attrDefs=false, $snmpTimeout=1000000, $snmpRetry=3){
+    public function __construct($ipAddress, $snmpCommunity, $attrDefs=array(), $snmpTimeout=1000000, $snmpRetry=3){
 
-        $attrDefs = ($attrDefs === false) ? self::$defaultAttrDefs : $attrDefs;
         parent::__construct($ipAddress, $snmpCommunity, $attrDefs, $snmpTimeout, $snmpRetry);
     }
 
@@ -170,7 +171,7 @@ class CiscoSNMPDevice extends SNMPDevice {
             $neighbor['discovery_timestamp'] = date('Y-m-d H:i:s');
 
             //Set neighbor address
-            $neighbor['mgmt_ip_addr'] = ip2long($neighborAddr);
+            $neighbor['ip_addr'] = $neighborAddr;
 
             //Get neighbor name
             $neighbor['name'] = $this->getAttribute(

@@ -7,11 +7,11 @@ class SNMPDevice {
     private $snmpTimeout;
     private $snmpRetry;
     private $attrDefs;
-    private $debug = true;
+    private $debug = false;
 
     const SYS_OBJ_ID_OID = '1.3.6.1.2.1.1.2.0';
 
-    public function __construct($ipAddress, $snmpCommunity, $attrDefs, $snmpTimeout=1000000, $snmpRetry=3){
+    public function __construct($ipAddress, $snmpCommunity, $attrDefs=array(), $snmpTimeout=1000000, $snmpRetry=3){
 
         $this->ipAddress = $ipAddress;
         $this->snmpCommunity = $snmpCommunity;
@@ -39,7 +39,7 @@ class SNMPDevice {
     public function loadAttrDefs($attrDefs, $merge=true){
 
         if($merge)
-            $this->attrDefs = array_merge($this->attrDefs, $attrDefs);
+            $this->attrDefs = array_replace_recursive($this->attrDefs, $attrDefs);
         else
             $this->attrDefs = $attrDefs;
     }
@@ -52,10 +52,7 @@ class SNMPDevice {
         //SysObjID is supposed to be defined for every SNMP device
         //so this is a good test to see if the device is responding
         //to this community name
-        if(@$this->getSysObjectId($timeout, $retry) === false)
-            return false;
-        else
-            return true;
+        return @$this->getSysObjectId($timeout, $retry) !== false;
     }
 
     /**
@@ -63,8 +60,18 @@ class SNMPDevice {
      */
     public function getSysObjectId($timeout=false, $retry=false){
 
-    $timeout = ($timeout === false) ? $this->snmpTimeout : $timeout;
+        $timeout = ($timeout === false) ? $this->snmpTimeout : $timeout;
         $retry = ($retry === false) ? $this->snmpRetry : $retry;
+
+        if($this->debug){
+            echo implode(" ", array(
+                "snmpget",
+                "-v 1",
+                "-c " . $this->snmpCommunity,
+                $this->ipAddress,
+                self::SYS_OBJ_ID_OID
+            )) . "\n";
+        }
 
         $value = snmpget(
             $this->ipAddress,

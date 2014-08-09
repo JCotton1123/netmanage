@@ -2,7 +2,7 @@
 <?php foreach($devices as $device) {
   $deviceFields = array(
     $device['Device']['name'],
-    $device['Device']['ip_addr'],
+    $device['Device']['friendly_ip_addr'],
     $device['Device']['model'],
     $device['Device']['serial'],
     $device['Device']['firmware']

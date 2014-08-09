@@ -9,9 +9,19 @@
   .signin h2 {
     text-align: center;
   }
+  .signin #logo {
+    width: 50px;
+  } 
+  .signin .alert {
+    padding: 5px;
+  }
 </style>
 <div class="signin">
-<h2>NetManage</h2>
+<h2>
+  <img id="logo" src="/img/logo.png" />
+  NetManage
+</h2>
+<?php echo $this->element('alerts'); ?>
 <?php
     echo $this->Form->create('User');
     echo $this->Form->input('username', array(

@@ -16,9 +16,9 @@ CakeLog::config('database', array(
 */
 
 App::uses('ClassRegistry', 'Utility');
-App::uses('CakeLogInterface','Log');
+App::uses('BaseLog', 'Log/Engine');
 
-class DatabaseLog implements CakeLogInterface{
+class DatabaseLog extends BaseLog {
 
     /**
     * Model name placeholder
@@ -34,6 +34,8 @@ class DatabaseLog implements CakeLogInterface{
     * Contruct the model class
     */
     public function __construct($options = array()) {
+
+        parent::__construct($options);
     
         if(!isset($options['model']))
             throw new \InvalidArgumentException('You must define a model');

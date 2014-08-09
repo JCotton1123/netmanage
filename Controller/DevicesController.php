@@ -1,6 +1,13 @@
 <?php
 class DevicesController extends AppController {
 
+    public function isAuthorized($user){
+
+        
+
+        return true;
+    }
+
     public function index() {
 
         $this->DataTables->setColumns(array(
@@ -10,7 +17,7 @@ class DevicesController extends AppController {
             ),
             'Address' => array(
                 'model' => 'Device',
-                'column' => 'ip_addr'
+                'column' => 'friendly_ip_addr'
             ),
             'Model' => array(
                 'model' => 'Device',
@@ -67,11 +74,7 @@ class DevicesController extends AppController {
         $this->DataTables->setColumns(array(
             'Neighbor Name' => array(
                 'model' => 'DeviceNeighbor',
-                'column' => 'name',
-            ),
-            'Neighbor Platform' => array(
-                'model' => 'DeviceNeighbor',
-                'column' => 'platform',
+                'column' => 'neighbor_name',
             ),
             'Local Port' => array(
                 'model' => 'DeviceNeighbor',
@@ -80,10 +83,6 @@ class DevicesController extends AppController {
             'Neighbor Port' => array(
                 'model' => 'DeviceNeighbor',
                 'column' => 'neighbor_port'
-            ),
-            'First Seen' => array(
-                'model' => 'DeviceNeighbor',
-                'column' => 'created'
             ),
             'Last Seen' => array(
                 'model' => 'DeviceNeighbor',
@@ -95,11 +94,13 @@ class DevicesController extends AppController {
 
             $this->DataTables->process(
                 array(
-                    'contain' => array(),
+                    'contain' => array(
+			            'Device'
+		            ),
                     'conditions' => array(
-                        'DeviceNeighbor.device_id' => $deviceId
+                        'Device.id' => $deviceId,
                     ),
-                    'field' => array(
+                    'fields' => array(
                         'DeviceNeighbor.*'
                     )
                 ),
@@ -127,9 +128,11 @@ class DevicesController extends AppController {
 
             $this->DataTables->process(
                 array(
-                    'contain' => array(),
+                    'contain' => array(
+                        'Device'
+                    ),
                     'conditions' => array(
-                        'DeviceConfig.device_id' => $deviceId
+                        'Device.id' => $deviceId
                     ),
                     'field' => array(
                         'DeviceConfig.created',

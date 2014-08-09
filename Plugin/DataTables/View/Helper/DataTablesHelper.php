@@ -10,10 +10,11 @@ class DataTablesHelper extends AppHelper {
     }
 
     public function getColumnHeadings($view='default'){
+
         return array_keys($this->settings[$view]['dataTable']['columns']);
     }
 
-    public function render($recordCallback=false,$view='default'){
+    public function render($recordCallback=false, $view='default'){
 
         $outputData = $this->flattenData($view);
         if(is_callable($recordCallback)){
@@ -36,7 +37,7 @@ class DataTablesHelper extends AppHelper {
         ));
     }
 
-    protected function flattenData($view='default'){
+    protected function flattenData($view='default', $numericIndex=true){
 
         $data = $this->settings[$view]['dataTable']['data'];
         $columns = $this->settings[$view]['dataTable']['columns'];
@@ -45,10 +46,14 @@ class DataTablesHelper extends AppHelper {
         foreach($data as $row){
             $flattenedResult = array();
             foreach($columns as $column){
-                if(!isset($row[$column['model']]) || !isset($row[$column['model']][$column['column']]))
-                    $flattenedResult[] = null;
+                $name = $column['column'];
+                $value = null;
+                if(isset($row[$column['model']]) && isset($row[$column['model']][$column['column']]))
+                    $value = $row[$column['model']][$column['column']];
+                if($numericIndex)
+                    $flattenedResult[] = $value;
                 else
-                    $flattenedResult[] = $row[$column['model']][$column['column']];
+                    $flattenedResult[$name] = $value;
             }
             $flattenedResults[] = $flattenedResult;
         }
@@ -65,7 +70,7 @@ class DataTablesHelper extends AppHelper {
      * @param string $ctaElement Call-to-action a element
      * @return string HTML table
      */
-    public function table($tableElementID, $tableColumns, $tableData, $dataTableOptions=array()) {
+    public function table($tableElementID, $tableColumns, $tableData, $tableAttributes=array()) {
 
         //Determine data source
         $loadDataViaAjax = false;
@@ -79,8 +84,11 @@ class DataTablesHelper extends AppHelper {
             $tableDataSrc = $tableData;
         }
 
-        $tableAttributes = array(
-            'class' => 'table table-striped table-bordered datatable dataTable',
+        if(isset($tableAttributes['class']))
+            $tableAttributes['class'] = 'dataTable datatable table ' . $tableAttributes['class'];
+
+        $defaultTableAttrs = array(
+            'class' => 'dataTable datatable table table-striped table-bordered',
             'data-type' => 'datatable',
             'id' => $tableElementID,
             'data-src' => $tableDataSrc,
@@ -90,10 +98,11 @@ class DataTablesHelper extends AppHelper {
             'data-raw-title' => 'false',
             'data-search' => 'true',
             'data-processing' => 'false',
-            'data-refresh' => 'false'
+            'data-refresh' => 'false',
+            'data-editable' => 'false',
         );
 
-        $tableAttributes = array_merge($tableAttributes,$dataTableOptions);
+        $tableAttributes = array_merge($defaultTableAttrs, $tableAttributes);
 
         if($loadDataViaAjax){
             $src = "<table " . self::buildElementAttributes($tableAttributes,"\"") . ">";

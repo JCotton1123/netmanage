@@ -1,7 +1,7 @@
 <?php
   $id = $device['Device']['id'];
   $name = $device['Device']['name'];
-  $ipAddr = $device['Device']['ip_addr'];
+  $ipAddr = $device['Device']['friendly_ip_addr'];
   $serialNumber = $device['Device']['serial'];
   $model = $device['Device']['model'];
   $sysObjectId = $device['Device']['sys_object_id'];
@@ -76,15 +76,14 @@
     'neighbors',
     array(
       'Neighbor Name',
-      'Neighbor Platform',
       'Local Port',
       'Neighbor Port',
-      'First Seen',
       'Last Seen'
     ),
     "/devices/neighbors/${id}.json",
     array(
-      'data-length' => 10
+      'class' => 'table-bordered table-striped table-condensed',
+      'data-length' => 10,
     )
   ); ?>
 </section> <!-- /neighbors -->
@@ -99,6 +98,7 @@
     ),
     "/devices/configs/${id}.json",
     array(
+      'class' => 'table-bordered table-striped table-condensed',
       'data-length' => 2
     )
   ); ?>
@@ -115,6 +115,7 @@
     ),
     "/device_logs/llist/${id}.json",
     array(
+      'class' => 'table-bordered table-striped table-condensed',
       'data-length' => 10,
     )
   ); ?>

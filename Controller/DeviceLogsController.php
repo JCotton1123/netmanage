@@ -52,7 +52,7 @@ class DeviceLogsController extends AppController {
                 ),
                 'Message' => array(
                     'model' => 'DeviceLog',
-                    'column' => 'event_descr'
+                    'column' => 'message'
                 )
             )); 
 
@@ -62,41 +62,27 @@ class DeviceLogsController extends AppController {
                     'DeviceLog.*'
                 ),
                 'conditions' => array(
-                    'DeviceLog.host' => $device['Device']['ip_addr']
+                    'DeviceLog.device_ip_addr' => $device['Device']['ip_addr']
                 )
             ));
         }
     }
 
-    public function stream($deviceId=null){
+    public function stream(){
 
-        $lastRequestTimestamp = $this->request->query('timestamp');
-        if(empty($lastRequestTimestamp))
-            $lastRequestTimestamp = time() - 3;
-
-        $conditions = array(
-            'timestamp >' => date('Y-m-d H:i:s', $lastRequestTimestamp)
-        );
-
-        if(!empty($deviceId)){
-
-            if(!$this->Device->exist($deviceId))
-                throw new NotFoundException('This device does not exist');
-
-            $device = $this->Device->findById($deviceId);
-
-            $conditions['host'] = $device['Device']['ip_addr'];
-        }
+        $limit = $this->request->query('length');
+        if(empty($limit))
+            $limit = 10;
 
         $logs = $this->DeviceLog->find('all', array(
-            'contain' => array(),
-            'conditions' => $conditions,
+            'contain' => array(
+                'Device'
+            ),
             'order' => array(
                 'timestamp' => 'desc'
             ),
-            'limit' => 10
+            'limit' => $limit
         ));
-        
 
         $this->set(array(
             'logs' => $logs

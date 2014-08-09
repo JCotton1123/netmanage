@@ -19,10 +19,8 @@ foreach($settings as $group => $groupSettings){
         $descr = $setting['description'];
         ?>
         <div class="form-group">
-          <label
-            for="<?php echo $fieldName; ?>"
-            title="<?php echo $descr; ?>">
-              <?php echo $shortName; ?>
+          <label for="<?php echo $fieldName; ?>">
+            <?php echo $shortName; ?>
           </label>
           <input
             class="form-control" 
@@ -31,6 +29,7 @@ foreach($settings as $group => $groupSettings){
             name="<?php echo $fieldName; ?>"
             value="<?php echo $value; ?>"
           />
+          <span class="help-block"><?php echo $descr; ?></span>
         </div>
       <?php } ?>
       <button type="submit" class="btn btn-primary">Save</button>

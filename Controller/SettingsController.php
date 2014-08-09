@@ -1,6 +1,12 @@
 <?php
 
 class SettingsController extends AppController {
+
+    public function isAuthorized($user) {
+
+        //return $this->isAdmin($user);
+        return true;
+    }
  
     public function index() {
 

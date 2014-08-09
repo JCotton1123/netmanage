@@ -89,9 +89,34 @@ Configure::write('Dispatcher.filters', array(
  */
 App::uses('CakeLog', 'Log');
 CakeLog::config('default', array(
+    'engine' => 'FileLog',
+    'types' => array(
+        'emergency',
+        'alert',
+        'critical',
+        'error',
+        'warning',
+        'notice',
+        'info',
+        'debug'
+    ),
+));
+CakeLog::config('netmanage', array(
     'engine' => 'DatabaseLogger.DatabaseLog',
     'model' => 'NetmanageLog',
-//    'types' => array('alert', 'emergency', 'critical', 'error', 'warning', 'info', 'debug')
+    'types' => array(
+        'emergency',
+        'alert',
+        'critical',
+        'error',
+        'warning',
+        'notice',
+    ),
+    'scopes' => array(
+        'device_logging',
+        'discovery',
+        'config_backup'
+    )
 ));
 
 
