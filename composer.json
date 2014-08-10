@@ -1,13 +1,8 @@
 {
     "name": "netmanage",
-    "repositories": [
-        {
-            "type": "pear",
-            "url": "http://pear.cakephp.org"
-        }
-    ],
     "require": {
-        "pear-cakephp/cakephp": ">=2.4.0"
+        "cakephp/cakephp": "2.5.1",
+        "cakephp/debug_kit": "2.2.4"
     },
     "config": {
         "vendor-dir": "Vendor/"

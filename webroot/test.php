@@ -52,10 +52,9 @@ if (!defined('APP_DIR')) {
  * The following line differs from its sibling
  * /app/webroot/test.php
  */
-//define('CAKE_CORE_INCLUDE_PATH', 'D:' . DS . 'wamp' . DS . 'bin' . DS . 'php' . DS . 'php5.4.12' . DS . 'pear');
 define(
     'CAKE_CORE_INCLUDE_PATH',
-    ROOT . DS . APP_DIR . '/Vendor/pear-pear.cakephp.org/CakePHP'
+    ROOT . DS . APP_DIR . '/Vendor/cakephp/cakephp/lib'
 );
 /**
  * Editing below this line should not be necessary.
