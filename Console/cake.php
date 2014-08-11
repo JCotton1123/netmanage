@@ -19,15 +19,15 @@
  */
 
 $ds = DIRECTORY_SEPARATOR;
-$dispatcher = 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
+$dispatcher = 'Vendor' . $ds . 'cakephp' . $ds . 'cakephp' . $ds . 'lib' . $ds . 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
 
 if (function_exists('ini_set')) {
 	$root = dirname(dirname(dirname(__FILE__)));
 
 	// the following line differs from its sibling
 	// /app/Console/cake.php
-    require dirname(dirname(__FILE__)) . '/Vendor/autoload.php';
-	ini_set('include_path', $root . PATH_SEPARATOR . 'D:' . $ds . 'wamp' . $ds . 'bin' . $ds . 'php' . $ds . 'php5.4.12' . $ds . 'pear' . PATH_SEPARATOR . ini_get('include_path'));
+	require dirname(dirname(__FILE__)) . '/Vendor/autoload.php';
+        ini_set('include_path', $root . $ds . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
 }
 
 if (!include $dispatcher) {
