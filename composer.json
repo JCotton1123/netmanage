@@ -2,7 +2,8 @@
     "name": "netmanage",
     "require": {
         "cakephp/cakephp": "2.5.1",
-        "cakephp/debug_kit": "2.2.4"
+        "cakephp/debug_kit": "2.2.4",
+        "phpspec/php-diff": "1.0.1"
     },
     "config": {
         "vendor-dir": "Vendor/"

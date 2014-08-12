@@ -27,20 +27,20 @@ class CiscoSNMPDevice extends SNMPDevice {
             'type' => 's'
         ),
         'cdpCacheAddress' => array(
-            'oid' => 'cdpCacheAddress',
+            'oid' => '1.3.6.1.4.1.9.9.23.1.2.1.1.4',
             'type' => 'a'
         ),
         'cdpCacheDeviceId' => array(
-            'oid' => 'cdpCacheDeviceId',
+            'oid' => '1.3.6.1.4.1.9.9.23.1.2.1.1.6',
             'type' => 's',
             'filter' => '/^([^.]+)\./'
         ),
         'cdpCacheDevicePort' => array(
-            'oid' => 'cdpCacheDevicePort',
+            'oid' => '1.3.6.1.4.1.9.9.23.1.2.1.1.7',
             'type' => 's'
         ),
         'cdpCachePlatform' => array(
-            'oid' => 'cdpCachePlatform',
+            'oid' => '1.3.6.1.4.1.9.9.23.1.2.1.1.8',
             'type' => 's'
         ),
         'reload' => array(

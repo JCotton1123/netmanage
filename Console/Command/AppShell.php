@@ -20,4 +20,8 @@ App::uses('Shell', 'Console');
  */
 class AppShell extends Shell {
 
+    public function startup(){
+        //Turn off those annoying headers displayed
+        //when a cmd is exec'd
+    }
 }

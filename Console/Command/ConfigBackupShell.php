@@ -2,6 +2,12 @@
 
 App::uses('SNMPDevice', 'SimpleSNMP');
 App::uses('CiscoSNMPDevice', 'SimpleSNMP');
+App::import('Vendor', 'Diff', array(
+    'file' => 'phpsec' . DS . 'php-diff' . DS . 'lib' . DS . 'Diff.php'
+));
+App::import('Vendor', 'Diff_Renderer_Text_Unified', array(
+    'file' => 'phpsec' . DS . 'php-diff' . DS . 'lib' . DS . 'Diff' . DS . 'Renderer' . DS . 'Text' . DS . 'Unified.php'
+));
 
 class ConfigBackupShell extends AppShell {
 
@@ -17,6 +23,37 @@ class ConfigBackupShell extends AppShell {
 
     public function main() {
 
+        $cakeCmdPath = dirname(dirname(__FILE__));
+
+	$this->settings = $this->Settings->get(array(
+           'config_backup'
+        ));
+
+        //Determine number of workers
+        $workerCount = 2;
+        if(isset($this->settings['config_backup.worker_count'])){
+            $workerCount = $this->settings['config_backup.worker_count'];
+        }
+
+        $deviceCount = $this->Device->find('count');
+        $devicesPerWorker = ceil($deviceCount / $workerCount);
+    
+        $this->log('Launching workers', 'debug', 'config_backup');    
+        for($x=0;$x<$deviceCount;$x+=$devicesPerWorker){
+            $offset = $x;
+            $limit = $devicesPerWorker - 1;
+            exec("$cakeCmdPath/cake config_backup worker $offset $limit >/dev/null 2>&1 &");
+        }
+    }
+
+    public function worker() {
+
+         if(count($this->args) != 2)
+             die('Expecting two parameters');
+
+         $offset = $this->args[0];
+         $limit = $this->args[1];
+
         //Retrieve settings
         $this->settings = $this->Settings->get(array(
             'global',
@@ -24,8 +61,14 @@ class ConfigBackupShell extends AppShell {
             'config_backup'
         ));
 
+	//Find devices
         $devices = $this->Device->find('all', array(
-            'contain' => array()
+            'contain' => array(),
+            'order' => array(
+                'ip_addr ASC'
+            ),
+            'limit' => $limit,
+            'offset' => $offset
         ));
 
         foreach($devices as $device){
@@ -34,11 +77,13 @@ class ConfigBackupShell extends AppShell {
             $deviceFriendlyAddr = $device['Device']['friendly_ip_addr'];
 
             //Check against blacklist
-            $ipBlacklistFilter = $this->settings['config_backup.ip_blacklist'];
-            if(!empty($ipBlacklistFilter)){
-                if(preg_match($ipBlacklistFilter, $deviceFriendlyAddr)){
-                    $this->log("Skipping device ${deviceFriendlyAddr} b/c its ip address is blacklisted", 'info', 'config_backup');
-                    continue;
+            if(isset($this->settings['config_backup.ip_blacklist'])){
+                $ipBlacklistFilter = $this->settings['config_backup.ip_blacklist'];
+                if(!empty($ipBlacklistFilter)){
+                    if(preg_match($ipBlacklistFilter, $deviceFriendlyAddr)){
+                        $this->log("Skipping device ${deviceFriendlyAddr} b/c its ip address is blacklisted", 'info', 'config_backup');
+                        continue;
+                    }
                 }
             }
 
@@ -124,6 +169,7 @@ class ConfigBackupShell extends AppShell {
         if($filename === false)
             return false;
 
+        chown($filename, 'nobody');
         chmod($filename, 0777);
 
         return $filename;
@@ -141,6 +187,12 @@ class ConfigBackupShell extends AppShell {
             }
         }
 
-        return xdiff_string_diff($oldConfig, $newConfig);
+        $diff = new Diff(
+            explode("\n", $oldConfig),
+            explode("\n", $newConfig)
+        );
+        $diffRenderer = new Diff_Renderer_Text_Unified();
+
+        return $diff->render($diffRenderer);
     }
 }
