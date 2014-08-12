@@ -13,3 +13,8 @@ See https://github.com/JCotton1123/netmanage-bootstrap
 * Configuration mgmt
 * Software mgmt
 * Better config diff solution
+
+## Notes
+
+Get SNMP OID
+`snmptranslate -On $(snmptranslate -IR cdpCacheAddress)`
