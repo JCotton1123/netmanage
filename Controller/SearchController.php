@@ -2,11 +2,12 @@
 
 class SearchController extends AppController {
  
-    public $uses = array();
+    public $uses = array(
+        'Device',
+        'ClientPort'
+    );
  
     public function index() {
-
-        $this->loadModel('Device');
 
         $searchTerm = false;
         $devices = array();
@@ -24,6 +25,15 @@ class SearchController extends AppController {
                         'Device.name LIKE' => $searchTermWithWild,
                         'INET_NTOA(Device.ip_addr) LIKE' => $searchTermWithWild
                     )
+                )
+            ));
+
+            $clients = $this->ClientPort->find('all', array(
+                'contain' => array(
+                    'Device'
+                ),
+                'conditions' => array(
+                    'ClientPort.friendly_mac_addr LIKE' => $searchTermWithWild
                 )
             ));
         }

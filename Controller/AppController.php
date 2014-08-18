@@ -42,6 +42,8 @@ class AppController extends Controller {
         $controller = strtolower($this->params['controller']);
         $this->set('controller', $controller);
         $activeNav = 'home';
+        if(in_array($controller, array('clients')))
+            $activeNav = 'clients';
         if(in_array($controller, array('devices','device_configs','device_attr_oids','device_config_mgmt','device_software_mgmt')))
             $activeNav = 'devices';
         elseif(in_array($controller, array('reports')))

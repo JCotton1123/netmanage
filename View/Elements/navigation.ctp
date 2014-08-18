@@ -18,6 +18,9 @@
           <li class="<?php echo ($activeNav == 'home') ? 'active' : ''; ?>">
             <a href="/">Home</a>
           </li>
+          <li class="<?php echo ($activeNav == 'clients') ? 'active' : ''; ?>">
+            <a href="/clients">Clients</a>
+          </li>
           <li class="dropdown <?php echo ($activeNav == 'devices') ? 'active' : ''; ?>">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Devices <span class="caret"></span>

@@ -115,7 +115,8 @@ CakeLog::config('netmanage', array(
     'scopes' => array(
         'device_logging',
         'discovery',
-        'config_backup'
+        'config_backup',
+        'snmp_traps'
     )
 ));
 
