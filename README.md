@@ -41,7 +41,7 @@ From Cisco's documentation, "The SNMP ifIndex persistence feature provides an in
 snmp ifmib ifindex persist
 ```
 
-Enable mac notifications globally
+Enable mac notifications globally.
 
 ```
 snmp-server enable traps mac-notification change
@@ -50,13 +50,13 @@ mac address-table notification change history-size 100
 mac address-table notification change
 ```
 
-Instruct your device to log mac notifications to this particular SNMP server.
+Instruct your device to log mac notifications to NetManage.
 
 ```
-snmp-server host <netmanage server> version 2c <snmp community> mac-notitication <snmp trap> ...
+snmp-server host <netmanage server address> version 2c <snmp community> mac-notitication <snmp trap> <snmp trap> ...
 ```
 
-Set the following on all **access** ports
+Set the following on all **access** ports.
 
 ```
 int range Fa0/1 - X
