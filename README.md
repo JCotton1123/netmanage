@@ -15,7 +15,7 @@ NetManage combines features from tools like [RANCID](http://www.shrubbery.net/ra
 
 ## Install
 
-[NetManage Bootstrap](https://github.com/JCotton1123/netmanage-bootstrap) provides the tools to easily deploy an instance of the NetManage including spinning up and configuring the infrastructure and deploying the application code contained here.
+[NetManage Bootstrap](https://github.com/JCotton1123/netmanage-bootstrap) provides the tools to easily deploy an instance of NetManage including spinning up and configuring the infrastructure and deploying the application code contained here.
 
 ## Device Configurations
 
