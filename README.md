@@ -6,6 +6,78 @@ A cisco-centric network management solution
 
 See https://github.com/JCotton1123/netmanage-bootstrap
 
+## Device Configurations
+
+### Logging 
+
+```
+logging facility local5
+logging <netmanage server address>
+```
+
+### Change management
+
+```
+archive
+ log config
+  logging enable
+  logging size 200
+  notify syslog contenttype plaintext
+  hidekeys
+```
+
+### SNMP traps
+
+```
+snmp-server host <netmanage server address> version 2c <snmp community> <snmp trap> <snmp trap>
+```
+
+#### Mac Notifications
+
+???
+
+```
+logging trap notifications
+```
+
+???
+
+```
+snmp ifmib ifindex persist
+```
+
+Enable mac notifications globally
+
+```
+snmp-server enable traps mac-notification change
+mac address-table notification change interval 5
+mac address-table notification change history-size 100
+mac address-table notification change
+```
+
+Instruct your device to log mac notifications to this particular SNMP server.
+
+```
+snmp-server host <netmanage server> version 2c <snmp community> mac-notitication <snmp trap> ...
+```
+
+Set the following on all **access** ports
+
+```
+int range Fa0/1 - X
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+!
+```
+
+### Software upgrades
+
+Allow NetManage to reboot your device via SNMP
+
+```
+snmp-server system-shutdown
+```
+
 ## To Do
 
 * User mgmt
