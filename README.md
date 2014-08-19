@@ -11,6 +11,7 @@ See https://github.com/JCotton1123/netmanage-bootstrap
 ### Logging 
 
 ```
+logging trap notifications
 logging facility local5
 logging <netmanage server address>
 ```
@@ -34,13 +35,7 @@ snmp-server host <netmanage server address> version 2c <snmp community> <snmp tr
 
 #### Mac Notifications
 
-???
-
-```
-logging trap notifications
-```
-
-???
+From Cisco's documentation, "The SNMP ifIndex persistence feature provides an interface index (ifIndex) value that is retained and used when the router reboots. The ifIndex value is a unique identifying number associated with a physical or logical interface".
 
 ```
 snmp ifmib ifindex persist
