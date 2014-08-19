@@ -1,14 +1,27 @@
 # Netmanage
 
-A cisco-centric network management solution
+A Cisco-centric open source network management solution, NetManage was designed to increase the efficency of a network team and provide the technical means to institute various best practices.
+
+NetManage combines features from tools like [RANCID](http://www.shrubbery.net/rancid/), [NetDisco](http://www.netdisco.org/), and others into a more user-friendly and powerful tool that is easy to setup.
+
+## Feature Set
+
+* A clean and responsive control panel
+* Configuration & change management
+* Configuration backups
+* Log aggregation and notifications
+* Various reports
+* Automatic device discovery via CDP
 
 ## Install
 
-See https://github.com/JCotton1123/netmanage-bootstrap
+[NetManage Bootstrap](https://github.com/JCotton1123/netmanage-bootstrap) provides the tools to easily deploy an instance of the NetManage including spinning up and configuring the infrastructure and deploying the application code contained here.
 
 ## Device Configurations
 
-### Logging 
+You must enable certain configurations on your Cisco gear to enable the features NetManage provides.
+
+### Logging
 
 ```
 logging trap notifications
