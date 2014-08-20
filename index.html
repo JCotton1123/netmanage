@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Netmanage by JCotton1123</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Netmanage</h1>
+          <h2>A Cisco-centric network management solution</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/JCotton1123/netmanage/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/JCotton1123/netmanage/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/JCotton1123/netmanage" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="netmanage" class="anchor" href="#netmanage"><span class="octicon octicon-link"></span></a>Netmanage</h1>
+
+<p>A Cisco-centric open source network management solution, NetManage was designed to increase the efficency of a network team and provide the technical means to institute various best practices.</p>
+
+<p>NetManage combines features from tools like <a href="http://www.shrubbery.net/rancid/">RANCID</a>, <a href="http://www.netdisco.org/">NetDisco</a>, and others into a more user-friendly and powerful tool that is easy to setup.</p>
+
+<h2>
+<a name="feature-set" class="anchor" href="#feature-set"><span class="octicon octicon-link"></span></a>Feature Set</h2>
+
+<ul>
+<li>A clean and responsive control panel</li>
+<li>Configuration &amp; change management</li>
+<li>Configuration backups</li>
+<li>Log aggregation and notifications</li>
+<li>Various reports</li>
+<li>Automatic device discovery via CDP</li>
+<li>Client <em>location</em> logging</li>
+</ul><h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p><a href="https://github.com/JCotton1123/netmanage-bootstrap">NetManage Bootstrap</a> provides the tools to easily deploy an instance of NetManage including spinning up and configuring the infrastructure and deploying the application code contained here.</p>
+
+<h2>
+<a name="device-configurations" class="anchor" href="#device-configurations"><span class="octicon octicon-link"></span></a>Device Configurations</h2>
+
+<p>You must enable certain configurations on your Cisco gear to enable the features NetManage provides.</p>
+
+<h3>
+<a name="logging" class="anchor" href="#logging"><span class="octicon octicon-link"></span></a>Logging</h3>
+
+<pre><code>logging trap notifications
+logging facility local5
+logging &lt;netmanage server address&gt;
+</code></pre>
+
+<h3>
+<a name="change-management" class="anchor" href="#change-management"><span class="octicon octicon-link"></span></a>Change management</h3>
+
+<pre><code>archive
+ log config
+  logging enable
+  logging size 200
+  notify syslog contenttype plaintext
+  hidekeys
+</code></pre>
+
+<h3>
+<a name="snmp-traps" class="anchor" href="#snmp-traps"><span class="octicon octicon-link"></span></a>SNMP traps</h3>
+
+<pre><code>snmp-server host &lt;netmanage server address&gt; version 2c &lt;snmp community&gt; &lt;snmp trap&gt; &lt;snmp trap&gt;
+</code></pre>
+
+<h4>
+<a name="mac-notifications" class="anchor" href="#mac-notifications"><span class="octicon octicon-link"></span></a>Mac Notifications</h4>
+
+<p>From Cisco's documentation, "The SNMP ifIndex persistence feature provides an interface index (ifIndex) value that is retained and used when the router reboots. The ifIndex value is a unique identifying number associated with a physical or logical interface".</p>
+
+<pre><code>snmp ifmib ifindex persist
+</code></pre>
+
+<p>Enable mac notifications globally.</p>
+
+<pre><code>snmp-server enable traps mac-notification change
+mac address-table notification change interval 5
+mac address-table notification change history-size 100
+mac address-table notification change
+</code></pre>
+
+<p>Instruct your device to log mac notifications to NetManage.</p>
+
+<pre><code>snmp-server host &lt;netmanage server address&gt; version 2c &lt;snmp community&gt; mac-notitication &lt;snmp trap&gt; &lt;snmp trap&gt; ...
+</code></pre>
+
+<p>Set the following on all <strong>access</strong> ports.</p>
+
+<pre><code>int range Fa0/1 - X
+ snmp trap mac-notification change added
+ snmp trap mac-notification change removed
+!
+</code></pre>
+
+<h3>
+<a name="software-upgrades" class="anchor" href="#software-upgrades"><span class="octicon octicon-link"></span></a>Software upgrades</h3>
+
+<p>Allow NetManage to reboot your device via SNMP</p>
+
+<pre><code>snmp-server system-shutdown
+</code></pre>
+
+<h2>
+<a name="to-do" class="anchor" href="#to-do"><span class="octicon octicon-link"></span></a>To Do</h2>
+
+<ul>
+<li>User mgmt</li>
+<li>Configuration mgmt</li>
+<li>Software mgmt</li>
+</ul><h2>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<p>Get SNMP OID
+<code>snmptranslate -On $(snmptranslate -IR cdpCacheAddress)</code></p>
+        </section>
+
+        <footer>
+          Netmanage is maintained by <a href="https://github.com/JCotton1123">JCotton1123</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
