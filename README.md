@@ -12,6 +12,7 @@ NetManage combines features from tools like [RANCID](http://www.shrubbery.net/ra
 * Log aggregation and notifications
 * Various reports
 * Automatic device discovery via CDP
+* Client *location* logging
 
 ## Install
 
