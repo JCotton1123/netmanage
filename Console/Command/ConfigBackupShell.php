@@ -17,15 +17,11 @@ class ConfigBackupShell extends AppShell {
         'DeviceConfig'
     );
 
-    public $tasks = array(
-        'Settings'
-    );
-
     public function main() {
 
         $cakeCmdPath = dirname(dirname(__FILE__));
 
-	$this->settings = $this->Settings->get(array(
+        $this->settings = $this->Setting->get(array(
            'config_backup'
         ));
 

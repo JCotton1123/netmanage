@@ -2,52 +2,26 @@
 
 class SettingsController extends AppController {
 
-    public function isAuthorized($user) {
+    public function isAuthorized($user){
 
-        //return $this->isAdmin($user);
-        return true;
+        $userRole = $user['Role']['name'];
+        if($userRole == 'administrator'){
+            return true;
+        }
+        elseif($userRole == 'user'){
+            return in_array(
+                $this->action,
+                array(
+                    'index'
+                )
+            );
+        }
+
+        return false;
     }
- 
+
     public function index() {
 
-        if($this->request->is('post')){
-
-            $rawNewSettings = $this->request->data;
-
-            //The dot (.) in the field names is replaced with __
-            //since PHP doesn't like associate array keys containing dots.
-            //Convert __ to .
-            $newSettings = array();
-            foreach($rawNewSettings as $name => $value){
-                $newSettings[str_replace('__', '.', $name)] = $value;
-            }
-
-            //Run through the validation rules for each setting
-            //TO BE IMPLEMENTED
-
-            //Update settings
-            //This should be moved to the model
-            $dataSource = $this->Setting->getDataSource();
-            $dataSource->begin();
-            $lastSaveSucceeded = true;
-            foreach($newSettings as $var => $val){
-                $lastSaveSucceeded = $this->Setting->updateAll(
-                    array('Setting.val' => $dataSource->value($val, 'string')),
-                    array('Setting.var' => $var)
-                );
-                if(!$lastSaveSucceeded)
-                    break;
-            }
-            if($lastSaveSucceeded) {
-                $dataSource->commit();
-                $this->flash('Settings saved successfully', 'success');
-            }
-            else {
-                $dataSource->rollback();
-                $this->flash('Failed to save settings');
-            }
-        }
-        
         $settings = $this->Setting->find('all', array(
             'contain' => array(),
             'order' => 'var'
@@ -85,5 +59,48 @@ class SettingsController extends AppController {
         }
 
         $this->set('settings', $settingsPrioritized);
+    }
+
+    public function update() {
+
+        if($this->request->is('post') || $this->request->is('put')){
+
+            $rawNewSettings = $this->request->data;
+
+            //The dot (.) in the field names is replaced with __
+            //since PHP doesn't like associate array keys containing dots.
+            //Convert __ to .
+            $newSettings = array();
+            foreach($rawNewSettings as $name => $value){
+                $newSettings[str_replace('__', '.', $name)] = $value;
+            }
+
+            //Run through the validation rules for each setting
+            //TO BE IMPLEMENTED
+
+            //Update settings
+            //This should be moved to the model
+            $dataSource = $this->Setting->getDataSource();
+            $dataSource->begin();
+            $lastSaveSucceeded = true;
+            foreach($newSettings as $var => $val){
+                $lastSaveSucceeded = $this->Setting->updateAll(
+                    array('Setting.val' => $dataSource->value($val, 'string')),
+                    array('Setting.var' => $var)
+                );
+                if(!$lastSaveSucceeded)
+                    break;
+            }
+            if($lastSaveSucceeded) {
+                $dataSource->commit();
+                $this->flash('Settings saved successfully', 'success');
+            }
+            else {
+                $dataSource->rollback();
+                $this->flash('Failed to save settings');
+            }
+        }
+
+        return $this->redirect('/settings');
     }
 }

@@ -12,10 +12,6 @@ class DiscoveryShell extends AppShell {
         'DeviceNeighbor'
     );
 
-    public $tasks = array(
-        'Settings'
-    );
-
     static $discoveryAttrs = array(
         'name',
         'model',
@@ -26,7 +22,7 @@ class DiscoveryShell extends AppShell {
     public function main() {
 
         //Retrieve settings
-        $this->settings = $this->Settings->get(array(
+        $this->settings = $this->Setting->get(array(
             'global',
             'discovery'
         ));

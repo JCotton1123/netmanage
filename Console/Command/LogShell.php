@@ -9,17 +9,13 @@ class LogShell extends AppShell {
         'DeviceLog'
     );
 
-    public $tasks = array(
-        'Settings'
-    );
-
     const LOG_DELIM = ':';
 
     public function main() {
 
         $countProcessedLogs = 0;
 
-        $this->settings = $this->Settings->get(array(
+        $this->settings = $this->Setting->get(array(
             'global',
             'device_logging'
         ));

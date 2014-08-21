@@ -3,6 +3,11 @@ class ReportsController extends AppController {
 
     public $uses = array();
 
+    public function isAuthorized($user){
+
+        return true;
+    }
+
     public function index(){}
 
     public function device_inventory(){

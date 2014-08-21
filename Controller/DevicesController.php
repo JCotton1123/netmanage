@@ -1,11 +1,27 @@
 <?php
+
 class DevicesController extends AppController {
 
     public function isAuthorized($user){
 
-        
+        $userRole = $user['Role']['name'];
+        if($userRole == 'administrator'){
+            return true;
+        }
+        elseif($userRole == 'user'){
+            return in_array(
+                $this->action,
+                array(
+                    'index',
+                    'view',
+                    'neighbors',
+                    'configs',
+                    'config'
+                )
+            );
+        }
 
-        return true;
+        return false;
     }
 
     public function index() {

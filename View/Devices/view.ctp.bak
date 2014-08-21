@@ -15,15 +15,28 @@
   $this->assign('title', $name);
 ?>
 
-<?php $this->start('actions');
-  echo $this->ActionMenu->menu(array(
-    'Delete' => array(
-      'url' => "/devices/delete/${id}",
-      'confirm' => 'Click OK to confirm you want to delete this device.',
-      'enabled' => in_array($__userRole, array('administrator'))
-    )
-  ));
-$this->end(); ?>
+<?php $this->start('actions'); ?>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="device-action-menu" data-toggle="dropdown">
+      Actions 
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="device-action-menu">
+      <li role="presentation">
+        <?php
+          echo $this->Html->link(
+            'Delete',
+            "/devices/delete/${id}",
+            array(
+              'role' => 'menuitem',
+              'tabindex' => '-1'),
+            'Are you sure you want to delete this device?'
+          );
+        ?>
+      </li>
+    </ul>
+  </div>
+<?php $this->end(); ?>
 
 <ol class="breadcrumb">
   <li><?php echo $this->Html->link('Devices', '/devices'); ?></li>

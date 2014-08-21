@@ -36,7 +36,7 @@
 </head>
 <body>
   <?php echo $this->element('navigation'); ?>
-  <div class="container <?php echo $controller; ?>">
+  <div class="container <?php echo $__controller; ?>">
     <?php echo $this->Session->flash(); ?>
     <?php echo $this->fetch('content'); ?>
   </div>

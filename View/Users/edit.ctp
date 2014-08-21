@@ -1,11 +1,17 @@
 <?php
+  $id = $user['User']['id'];
+  $name = $user['User']['name'];
+?>
+
+<?php
   $this->extend('/Common/default');
-  $this->assign('title', 'Add New User');
+  $this->assign('title', 'Edit User');
 ?>
 
 <ol class="breadcrumb">
   <li><?php echo $this->Html->link('Users', '/users'); ?></li>
-  <li class="active">Add New User</li>
+  <li><?php echo $this->Html->link($name, "/users/view/${id}"); ?></li>
+  <li class="active">Edit User</li>
 </ol>
 
 <section>
@@ -31,20 +37,12 @@
     echo $this->Form->input('username', array(
       'class' => 'form-control',
     ));
-    echo $this->Form->input('password', array(
-      'type' => 'password',
-      'class' => 'form-control',
-    ));
-    echo $this->Form->input('confirm_password', array(
-      'type' => 'password',
-      'class' => 'form-control'
-    ));
     echo $this->Form->input('role_id', array(
       'options' => $roles,
       'label' => 'Role',
       'class' => 'form-control'
     ));
-    echo $this->Form->button('Create', array(
+    echo $this->Form->button('Update', array(
       'class' => 'btn btn-primary'
     ));
     echo $this->Form->end();

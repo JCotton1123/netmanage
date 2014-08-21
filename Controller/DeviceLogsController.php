@@ -2,6 +2,11 @@
 
 class DeviceLogsController extends AppController {
 
+    public function isAuthorized($user){
+
+        return true;
+    }
+
     public function llist($deviceId=null) {
 
         $this->loadModel('Device');

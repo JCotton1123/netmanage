@@ -2,6 +2,11 @@
 
 class DeviceConfigsController extends AppController {
 
+    public function isAuthorized($user){
+
+        return true;
+    }
+
     public function view($configId=null){
 
         if(!$this->DeviceConfig->exists($configId))

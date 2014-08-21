@@ -16,7 +16,8 @@ class AppController extends Controller {
     public $helpers = array(
         'Form',
         'Time',
-        'DataTables.DataTables'
+        'DataTables.DataTables',
+        'ActionMenu'
     );
 
     public function beforeFilter() {
@@ -24,38 +25,29 @@ class AppController extends Controller {
         # Set auth parameters
         $this->Auth->authorize = array('Controller');
         $this->Auth->authenticate = array(
-            'Form'
+            'Form' => array(
+                'passwordHasher' => 'Blowfish'
+            )
         );
     }
 
     public function beforeRender(){
 
-        //Pass user variables to the view
-        $user = $this->Auth->User();
-        $this->set('isLoggedIn', $user != false);
-        $this->set('username', $this->Auth->User('username'));
+        //Pass some variables to the view
+        $this->set('__isLoggedIn', $this->Auth->loggedIn());
+        $this->set('__userRole', $this->Auth->User('Role.name'));
+        $this->set('__isDebug', Configure::read('debug') > 0);
 
-        //Pass isDebug to the view
-        $this->set('isDebug', Configure::read('debug') > 0);
-
-        //Determine which nav item should be active & pass to the view
         $controller = strtolower($this->params['controller']);
-        $this->set('controller', $controller);
-        $activeNav = 'home';
-        if(in_array($controller, array('clients')))
-            $activeNav = 'clients';
-        if(in_array($controller, array('devices','device_configs','device_attr_oids','device_config_mgmt','device_software_mgmt')))
-            $activeNav = 'devices';
-        elseif(in_array($controller, array('reports')))
-            $activeNav = 'reports';
-        elseif(in_array($controller, array('settings')))
-            $activeNav = 'settings';
-        $this->set('activeNav', $activeNav);
+        $this->set('__controller', $controller);
     }
 
     public function isAuthorized($user) {
 
-        return true;
+        if($user['Role']['name'] == 'administrator')
+            return true;
+
+        return false;
     }
 
     public function flash($message, $type="error", $dismissable=true){

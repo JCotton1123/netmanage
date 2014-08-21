@@ -6,6 +6,11 @@ class SearchController extends AppController {
         'Device',
         'ClientPort'
     );
+
+    public function isAuthorized($user){
+
+        return true;
+    }
  
     public function index() {
 
