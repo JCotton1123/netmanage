@@ -12,6 +12,11 @@
  */
 
 /**
+ * Read code environment from the env and define for use elsewhere
+ */
+define('CODE_ENVIRONMENT', env('CODE_ENVIRONMENT'));
+
+/**
  * CakePHP Debug Level:
  *
  * Production Mode:
@@ -24,7 +29,12 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+if(CODE_ENVIRONMENT == 'production') {
+	Configure::write('debug', 0);
+}
+else {
+    Configure::write('debug', 2);
+}
 
 /**
  * Configure the Error handler used to handle errors for your application. By default
@@ -215,12 +225,12 @@
 /**
  * A random string used in security hashing methods.
  */
-    Configure::write('Security.salt', 'DYhG93q34asdgafgSDFSHaqe346agadsfadsf435bWwvniR2G0FgaC9mi');
+    Configure::write('Security.salt', env('SECURITY_SALT'));
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-    Configure::write('Security.cipherSeed', '7685934356254623411346356845843345623454245818149683645');
+    Configure::write('Security.cipherSeed', env('SECURITY_CIPHERSEED'));
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -260,7 +270,7 @@
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	date_default_timezone_set('UTC');
+	date_default_timezone_set(env('PHP_DATETIME'));
 
 /**
  *
