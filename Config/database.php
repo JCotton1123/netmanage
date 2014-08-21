@@ -1,18 +1,13 @@
 <?php
 class DATABASE_CONFIG {
 
-	public $default = array();
-
-    public function __construct() {
-
-        $this->default = array(
-            'datasource' => env('DB_TYPE'),
-            'persistent' => env('DB_PERSIST_CONNS'),
-            'host' => env('DB_HOST'),
-            'login' => env('DB_LOGIN'),
-            'password' => env('DB_PASSWD'),
-            'database' => env('DB_NAME'),
-            'prefix' => '',
-        );
-    }
+	public $default = array(
+        'datasource' => DB_TYPE,
+        'persistent' => DB_PERSIST_CONNS,
+        'host' => DB_HOST,
+        'login' => DB_LOGIN,
+        'password' => DB_PASSWD,
+        'database' => DB_NAME,
+        'prefix' => ''
+    );
 }

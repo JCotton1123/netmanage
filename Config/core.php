@@ -12,9 +12,9 @@
  */
 
 /**
- * Read code environment from the env and define for use elsewhere
+ * Load environment specific parameters
  */
-define('CODE_ENVIRONMENT', env('CODE_ENVIRONMENT'));
+    require(APP . "/.envvars");
 
 /**
  * CakePHP Debug Level:
@@ -225,12 +225,12 @@ else {
 /**
  * A random string used in security hashing methods.
  */
-    Configure::write('Security.salt', env('SECURITY_SALT'));
+    Configure::write('Security.salt', SECURITY_SALT);
 
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-    Configure::write('Security.cipherSeed', env('SECURITY_CIPHERSEED'));
+    Configure::write('Security.cipherSeed', SECURITY_CIPHERSEED);
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
@@ -270,7 +270,7 @@ else {
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	date_default_timezone_set(env('PHP_DATETIME'));
+	date_default_timezone_set('UTC');
 
 /**
  *
