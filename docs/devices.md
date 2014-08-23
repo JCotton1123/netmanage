@@ -2,7 +2,7 @@
 
 You must enable certain configurations on your Cisco gear to support the features NetManage provides.
 
-## Log Aggregation & Change Configuration
+## Log Aggregation & Change Management
 
 ```
 logging trap notifications
@@ -47,7 +47,7 @@ int range Fa0/1 - X
 
 ## Software upgrades
 
-Allow NetManage to reboot your device via SNMP
+Allow NetManage to reboot your device via SNMP:
 
 ```
 snmp-server system-shutdown
