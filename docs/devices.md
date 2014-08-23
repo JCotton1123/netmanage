@@ -2,15 +2,13 @@
 
 You must enable certain configurations on your Cisco gear to support the features NetManage provides.
 
-## Logging
+## Log Aggregation & Change Configuration
 
 ```
 logging trap notifications
 logging facility local5
 logging <netmanage server address>
 ```
-
-## Change management
 
 ```
 archive
@@ -67,13 +65,4 @@ Allow NetManage to reboot your device via SNMP
 snmp-server system-shutdown
 ```
 
-## To Do
 
-* User mgmt
-* Configuration mgmt
-* Software mgmt
-
-## Notes
-
-Get SNMP OID
-`snmptranslate -On $(snmptranslate -IR cdpCacheAddress)`
