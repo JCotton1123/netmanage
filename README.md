@@ -22,7 +22,6 @@ You must enable certain configurations on your Cisco gear to support the feature
 
 ## To Do
 
-* Move the initial data stored in init.sql into the schema file
 * Configuration mgmt
 * Software mgmt
 
