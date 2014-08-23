@@ -19,21 +19,11 @@ archive
   hidekeys
 ```
 
-## SNMP traps
-
-```
-snmp-server host <netmanage server address> version 2c <snmp community> <snmp trap> <snmp trap>
-```
-
-### Mac Notifications
-
-From Cisco's documentation, "The SNMP ifIndex persistence feature provides an interface index (ifIndex) value that is retained and used when the router reboots. The ifIndex value is a unique identifying number associated with a physical or logical interface".
+## Client Locations
 
 ```
 snmp ifmib ifindex persist
 ```
-
-Enable mac notifications globally.
 
 ```
 snmp-server enable traps mac-notification change
@@ -42,13 +32,11 @@ mac address-table notification change history-size 100
 mac address-table notification change
 ```
 
-Instruct your device to log mac notifications to NetManage.
-
 ```
 snmp-server host <netmanage server address> version 2c <snmp community> mac-notitication <snmp trap> <snmp trap> ...
 ```
 
-Set the following on all **access** ports.
+On all **access** ports:
 
 ```
 int range Fa0/1 - X
