@@ -18,10 +18,17 @@ $navItems = array(
             'devices',
             'device_configs',
             'device_attr_oids',
+            'device_software_mgmt',
         ),
         'subitems' => array(
             'Device Management' => array(
                 'url' => '/devices'
+            ),
+            'Software Management' => array(
+                'url' => '/device_software_mgmt',
+                'roles' => array(
+                    'administrator'
+                ) 
             ),
             'Device Attribute OIDs' => array(
                 'url' => '/device_attr_oids',
