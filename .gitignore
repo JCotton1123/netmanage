@@ -6,6 +6,7 @@ composer.lock
 
 # Plugins (loaded by composer)
 /Plugin/DebugKit
+/Plugin/Queue
 
 # Vendor
 /Vendor/*

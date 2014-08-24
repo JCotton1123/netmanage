@@ -3,7 +3,8 @@
     "require": {
         "cakephp/cakephp": "2.5.1",
         "cakephp/debug_kit": "2.2.4",
-        "phpspec/php-diff": "1.0.1"
+        "phpspec/php-diff": "1.0.1",
+        "dereuromark/cakephp-queue": "dev-master"
     },
     "config": {
         "vendor-dir": "Vendor/"
