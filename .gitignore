@@ -1,6 +1,3 @@
-# Composer lock
-composer.lock
-
 # Environment settings
 .envvars
 
