@@ -12,6 +12,18 @@ A Cisco-centric open source network management solution, NetManage was designed 
 * Automatic device discovery via CDP
 * Client *location* logging
 
+## Screenshots
+
+* [Dashboard](http://jcotton1123.github.io/netmanage/images/screenshots/dashboard.png)
+* [Clients](http://jcotton1123.github.io/netmanage/images/screenshots/clients.png)
+* [Devices](http://jcotton1123.github.io/netmanage/images/screenshots/devices.png)
+* [Device 1](http://jcotton1123.github.io/netmanage/images/screenshots/device-1.png)
+* [Device 2](http://jcotton1123.github.io/netmanage/images/screenshots/device-2.png)
+* [Device 3](http://jcotton1123.github.io/netmanage/images/screenshots/device-3.png)
+* [Reports](http://jcotton1123.github.io/netmanage/images/screenshots/reports.png)
+* [Settings](http://jcotton1123.github.io/netmanage/images/screenshots/settings.png)
+* [Users](http://jcotton1123.github.io/netmanage/images/screenshots/users.png)
+
 ## Install/Upgrade
 
 [NetManage Bootstrap](https://github.com/JCotton1123/netmanage-bootstrap) provides the tools to easily boostrap or upgrade an instance of NetManage, including configuring the infrastructure, deploying the application code, and handling schema installs and upgrades.
@@ -22,6 +34,8 @@ You must enable certain configurations on your Cisco gear to support the feature
 
 ## To Do
 
+* Publish better screenshots
 * Configuration mgmt
 * Software mgmt
+
 
