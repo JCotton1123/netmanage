@@ -4,7 +4,7 @@
         "cakephp/cakephp": "2.5.1",
         "cakephp/debug_kit": "2.2.4",
         "phpspec/php-diff": "1.0.1",
-        "dereuromark/cakephp-queue": "dev-master"
+        "dereuromark/cakephp-queue": "2.0.0"
     },
     "config": {
         "vendor-dir": "Vendor/"
