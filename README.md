@@ -1,6 +1,6 @@
 # Netmanage
 
-A Cisco-centric open source network management solution, NetManage was designed to increase the efficency of a network team and provide the technical means to institute various best practices. NetManage combines features from other popular tools into a more user-friendly and powerful tool. It is also easy to deploy and maintain thanks to the orchestration tools that are developed along side it.
+A Cisco-centric open source network management solution, NetManage was designed to increase the efficiency of a network team and provide the technical means to institute various best practices. NetManage combines features from other popular tools into a more user-friendly and powerful tool. It is also easy to deploy and maintain thanks to the orchestration tools that are developed along side it.
 
 ## Feature Set
 
