@@ -14,20 +14,18 @@ A Cisco-centric open source network management solution, NetManage was designed 
 
 ## Screenshots
 
-**The data was obfuscated. Nowhere am I using non-private 172 addresses.**
-
-* [Dashboard](http://jcotton1123.github.io/netmanage/images/screenshots/dashboard.png)
-* [Clients](http://jcotton1123.github.io/netmanage/images/screenshots/clients.png)
-* [Devices](http://jcotton1123.github.io/netmanage/images/screenshots/devices.png)
-* [Device 1](http://jcotton1123.github.io/netmanage/images/screenshots/device-1.png)
-* [Device 2](http://jcotton1123.github.io/netmanage/images/screenshots/device-2.png)
-* [Device 3](http://jcotton1123.github.io/netmanage/images/screenshots/device-3.png)
-* [Reports](http://jcotton1123.github.io/netmanage/images/screenshots/reports.png)
-* [Settings 1](http://jcotton1123.github.io/netmanage/images/screenshots/settings-1.png)
-* [Settings 2](http://jcotton1123.github.io/netmanage/images/screenshots/settings-2.png)
-* [Settings 3](http://jcotton1123.github.io/netmanage/images/screenshots/settings-3.png)
-* [Settings 4](http://jcotton1123.github.io/netmanage/images/screenshots/settings-4.png)
-* [Users](http://jcotton1123.github.io/netmanage/images/screenshots/users.png)
+<img alt="Dashboard" src="http://jcotton1123.github.io/netmanage/images/screenshots/dashboard.png" width="250px" align="left" />
+<img alt="Clients" src="http://jcotton1123.github.io/netmanage/images/screenshots/clients.png" width="250px" align="left" />
+<img alt="Devices" src="http://jcotton1123.github.io/netmanage/images/screenshots/devices.png" width="250px" align="left" />
+<img alt="Device 1" src="http://jcotton1123.github.io/netmanage/images/screenshots/device-1.png" width="250px" align="left" />
+<img alt="Device 2" src="http://jcotton1123.github.io/netmanage/images/screenshots/device-2.png" width="250px" align="left" />
+<img alt="Device 3" src="http://jcotton1123.github.io/netmanage/images/screenshots/device-3.png" width="250px" align="left" />
+<img alt="Reports" src="http://jcotton1123.github.io/netmanage/images/screenshots/reports.png" width="250px" align="left" />
+<img alt="Settings 1" src="http://jcotton1123.github.io/netmanage/images/screenshots/settings-1.png" width="250px" align="left" />
+<img alt="Settings 2" src="http://jcotton1123.github.io/netmanage/images/screenshots/settings-2.png" width="250px" align="left" />
+<img alt="Settings 3" src="http://jcotton1123.github.io/netmanage/images/screenshots/settings-3.png" width="250px" align="left" />
+<img alt="Settings 4" src="http://jcotton1123.github.io/netmanage/images/screenshots/settings-4.png" width="250px" align="left" />
+<img alt="Users" src="http://jcotton1123.github.io/netmanage/images/screenshots/users.png" width="250px" />
 
 ## Install/Upgrade
 
