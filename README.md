@@ -27,6 +27,11 @@ A Cisco-centric open source network management solution, NetManage was designed 
 <img alt="Settings 4" src="http://jcotton1123.github.io/netmanage/images/screenshots/settings-4.png" width="250px" align="left" />
 <img alt="Users" src="http://jcotton1123.github.io/netmanage/images/screenshots/users.png" width="250px" />
 
+**Coming Soon...**
+
+<img alt="Push Configuration" src="http://jessecotton.com/assets/images/projects/netmanage/push-config.png" width="250px" align="left" />
+<img alt="Software Upgrades" src="http://jessecotton.com/assets/images/projects/netmanage/software-upgrade.png" width="250px" />
+
 ## Install/Upgrade
 
 [NetManage Bootstrap](https://github.com/JCotton1123/netmanage-bootstrap) provides the tools to easily boostrap or upgrade an instance of NetManage, including configuring the infrastructure, deploying the application code, and handling schema installs and upgrades.
@@ -34,11 +39,3 @@ A Cisco-centric open source network management solution, NetManage was designed 
 ## Device Configurations
 
 You must enable certain configurations on your Cisco gear to support the features NetManage provides. These configurations are documented [here](docs/devices.md).
-
-## To Do
-
-* Publish better screenshots
-* Configuration mgmt
-* Software mgmt
-
-
